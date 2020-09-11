@@ -4,10 +4,14 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 const App = () => {
   return (
     <Router>
-      <div>
-        <h1>Lambda Eats</h1>
-        <p>You can remove this code and create your own header</p>
-      </div>
+      <Route exact path='/'>
+        <div>
+          <h1>Lambda Eats</h1>
+        </div>
+      </Route>
+      <Route path='/components/pizza'>
+        <Pizza />
+      </Route>
     </Router>
   );
 };
