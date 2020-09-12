@@ -17,7 +17,7 @@ describe('Testing form', () => {
 
         cy.get('[for="pepperoni"] > input').check().should("be.checked")
 
-        cy.get(':nth-child(6) > input').check().should('be.checked')
+        cy.get('[for="pineapple"]').check().should('be.checked')
 
         cy.get('[data-cy=submitButton]').should('be.not.disabled')
     })
