@@ -163,9 +163,9 @@ export default function Form() {
                     onChange={inputChange}
                 />
             </label>
-            <Link to='./confirmation'>
-                <button type='submit' disabled={buttonDisabled} >Submit</button>
-            </Link>
+            {/* <Link to='./confirmation'> */}
+                <button data-cy='submitButton' disabled={buttonDisabled} >Add to Order</button>
+            {/* </Link> */}
         </form>
     )
 };
