@@ -6,12 +6,12 @@ import axios from 'axios';
 const formSchema = yup.object().shape({
     name: yup.string().required('Wait so who are you?'),
     size: yup.string().required('How hungry are you?'),
-    pepperoni: yup.boolean(),
-    bacon: yup.boolean(),
-    mushroom: yup.boolean(),
-    pineapple: yup.boolean(),
+    pepperoni: yup.mixed(),
+    bacon: yup.mixed(),
+    mushroom: yup.mixed(),
+    pineapple: yup.mixed(),
     instructions: yup.string()
-})
+});
 
 export default function Form() {
 
@@ -41,9 +41,9 @@ export default function Form() {
 
     useEffect(() => {
         formSchema.isValid(formState).then(valid => {
-            setButtonDisabled(!valid)
+          setButtonDisabled(!valid);
         });
-    }, [formState]);
+      }, [formState]);
 
     const validate = (e) => {
         let value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;

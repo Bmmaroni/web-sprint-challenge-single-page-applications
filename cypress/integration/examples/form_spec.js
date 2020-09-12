@@ -11,6 +11,8 @@ describe('Testing form', () => {
         
         cy.get('[for="name"] > input').type(name).should('have.value', name)
 
+        cy.get('select').select('Large').should('have.value', 'Large')
+
         cy.get('[data-cy=instructionsBox]').type(instruct).should('have.value', instruct)
 
         cy.get('[for="pepperoni"] > input').check().should("be.checked")
