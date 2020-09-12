@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Form from './components/Form';
+import Confirmation from './components/Confirmation';
 
 const App = () => {
   return (
@@ -15,6 +16,9 @@ const App = () => {
         </Route>
         <Route path='/pizza'>
           <Form />
+        </Route>
+        <Route path='/confirmation'>
+          <Confirmation />
         </Route>
       </div>
     </Router>

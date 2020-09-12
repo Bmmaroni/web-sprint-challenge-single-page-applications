@@ -5,8 +5,8 @@ export default function Confirmation() {
 
     return(
         <div>
-            <h2></h2>
-            <img src='../assests/Pizza.jpg' alt='Dog with Pizza' />
+            <h2>Congrats! Pizza is on its way!</h2>
+            <img src='.../Wireframes/Pizza.gif' alt='Dog with Pizza' />
         </div>
     )
 };

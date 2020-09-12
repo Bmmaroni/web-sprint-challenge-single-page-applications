@@ -158,6 +158,7 @@ export default function Form() {
 
             <label htmlFor='instructions'>
                 <textarea 
+                    data-cy='instructionsBox'
                     name='instructions'
                     value={formState.instructions}
                     onChange={inputChange}
