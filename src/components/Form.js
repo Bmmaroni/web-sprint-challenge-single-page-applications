@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import * as yup from 'yup';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 const formSchema = yup.object().shape({
     name: yup.string().required('Wait so who are you?'),
@@ -10,7 +10,7 @@ const formSchema = yup.object().shape({
     bacon: yup.boolean(),
     mushroom: yup.boolean(),
     pineapple: yup.boolean(),
-    instructions: yup.boolean()
+    instructions: yup.string()
 })
 
 export default function Form() {
@@ -102,7 +102,7 @@ export default function Form() {
                     value={formState.name} 
                     onChange={inputChange}
                 />
-                {errorState.name.length > 2 ? (<p>{errorState.name}</p>) : null}
+                {errorState.name.length > 0 ? (<p>{errorState.name}</p>) : null}
             </label>
 
             <label htmlFor='size'>
@@ -125,7 +125,7 @@ export default function Form() {
                 Pepperoni
             </label>
                 
-            <label>    
+            <label htmlFor='bacon'>    
                 <input 
                     type='checkbox' 
                     name='bacon' 
@@ -135,7 +135,7 @@ export default function Form() {
                 Bacon
             </label>    
 
-            <label>
+            <label htmlFor='mushroom'>
                 <input 
                     type='checkbox' 
                     name='mushroom' 
@@ -145,7 +145,7 @@ export default function Form() {
                 Mushroom
             </label>
             
-            <label>
+            <label htmlFor='pineapple'>
                 <input 
                     type='checkbox' 
                     name='pineapple' 
