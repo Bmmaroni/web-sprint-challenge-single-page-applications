@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import * as yup from 'yup';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const formSchema = yup.object().shape({
-    name: yup.string().required(''),
-    size: yup,
-    toppings: yup,
-    special: yup.string()
+    name: yup.string().required('Wait so who are you?'),
+    size: yup.string().required('How hungry are you?'),
+    pepperoni: yup.boolean(),
+    bacon: yup.boolean(),
+    mushroom: yup.boolean(),
+    pineapple: yup.boolean(),
+    instructions: yup.boolean()
 })
 
 export default function Form() {
@@ -14,15 +18,21 @@ export default function Form() {
     const [formState, setFormState] = useState({
         name: '',
         size: '',
-        toppings: '',
-        special: ''
+        pepperoni: '',
+        bacon: '',
+        mushroom: '',
+        pineapple: '',
+        instructions: ''
     });
 
     const [errorState, setErrorState] = useState({
         name: '',
         size: '',
-        toppings: '',
-        special: ''
+        pepperoni: '',
+        bacon: '',
+        mushroom: '',
+        pineapple: '',
+        instructions: ''
     });
 
     const [post, setPost] = useState([]);
@@ -36,7 +46,7 @@ export default function Form() {
     }, [formState]);
 
     const validate = (e) => {
-        let value = e.target.type === 'e.target.checkbox' ? e.target.checked : e.target.value;
+        let value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
         yup
             .reach(formSchema, e.target.name)
             .validate(value)
@@ -46,12 +56,18 @@ export default function Form() {
                     [e.target.name]: ''
                 });
             })
+            .catch( err => {
+                setErrorState({
+                    ...errorState,
+                    [e.target.name]: err.errors[0]
+                });
+            })
     };
 
     const inputChange = (e) => {
         e.persist();
         validate(e);
-        const value = e.target.type === 'e.target.checkbox' ? e.target.checked : e.target.value;
+        const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
         setFormState({...formState, [e.target.name]: value})
     };
 
@@ -66,8 +82,11 @@ export default function Form() {
                 setFormState({
                     name: '',
                     size: '',
-                    toppings: '',
-                    special: ''
+                    pepperoni: '',
+                    bacon: '',
+                    mushroom: '',
+                    pineapple: '',
+                    instructions: ''
                 })
             })
             .catch( err => console.log(err));
@@ -77,25 +96,76 @@ export default function Form() {
         <form onSubmit={formSubmit}>
             <label htmlFor='name'>
                 Name
-                <input type='text' name='name' value={formState.name} />
+                <input 
+                    type='text' 
+                    name='name' 
+                    value={formState.name} 
+                    onChange={inputChange}
+                />
                 {errorState.name.length > 2 ? (<p>{errorState.name}</p>) : null}
             </label>
 
-            <label>
-                <select>
-                    <option>Small</option>
-                    <option>Medium</option>
-                    <option>Large</option>
+            <label htmlFor='size'>
+                Size
+                <select name='size' onChange={inputChange}>
+                    <option value='Small'>Small</option>
+                    <option value='Medium'>Medium</option>
+                    <option value='Large'>Large</option>
                 </select>
+                {errorState.size.length > 0 ? (<p>{errorState.size}</p>) : null}
             </label>
 
-            <label>
-                <input />
+            <label htmlFor='pepperoni'>
+                <input 
+                    type='checkbox' 
+                    name='pepperoni' 
+                    checked={formState.pepperoni} 
+                    onChange={inputChange}
+                />
+                Pepperoni
             </label>
+                
+            <label>    
+                <input 
+                    type='checkbox' 
+                    name='bacon' 
+                    checked={formState.bacon} 
+                    onChange={inputChange}
+                />
+                Bacon
+            </label>    
 
             <label>
-                <input />
+                <input 
+                    type='checkbox' 
+                    name='mushroom' 
+                    checked={formState.mushroom} 
+                    onChange={inputChange}
+                />
+                Mushroom
             </label>
+            
+            <label>
+                <input 
+                    type='checkbox' 
+                    name='pineapple' 
+                    checked={formState.pineapple} 
+                    onChange={inputChange}
+                />
+                Pineapple
+
+            </label>
+
+            <label htmlFor='instructions'>
+                <textarea 
+                    name='instructions'
+                    value={formState.instructions}
+                    onChange={inputChange}
+                />
+            </label>
+            <Link to='./confirmation'>
+                <button type='submit' disabled={buttonDisabled} >Submit</button>
+            </Link>
         </form>
     )
 };
